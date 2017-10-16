@@ -1,0 +1,21 @@
+{
+  "name": "ripay",
+  "homepage": "https://github.com/cloudxpc/ripay",
+  "authors": [
+    "Rick"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/main/webapp/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
