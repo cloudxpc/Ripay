@@ -1,105 +1,77 @@
 package com.rickxpc.ripay.config;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 @Component
-@ConfigurationProperties(prefix = "wxconfig")
 public class WxConfig {
-    private String appid;
-    private String appsecret;
-    private String mchid;
+    @Value("${wxconfig.appid}")
+    private String appId;
+    @Value("${wxconfig.appsecret}")
+    private String appSecret;
+    @Value("${wxconfig.mchid}")
+    private String mchId;
+    @Value("${wxconfig.key}")
     private String key;
+    @Value("${wxconfig.api.authorize}")
+    private String authorizeApi;
+    @Value("${wxconfig.api.access-token}")
+    private String accessTokenApi;
+    @Value("${wxconfig.api.unified-order}")
+    private String unifiedOrderApi;
+    @Value("${wxconfig.api.order-query}")
+    private String orderQueryApi;
+    @Value("${wxconfig.api.close-order}")
+    private String closeOrderApi;
+    @Value("${wxconfig.api.download-bill}")
+    private String downloadBillApi;
+    @Value("${wxconfig.url.notify}")
     private String notifyUrl;
-    private Api api;
 
-    public static class Api{
-        private String unifiedOrder;
-        private String orderQuery;
-        private String closeOrder;
-        private String downloadBill;
-
-        public String getUnifiedOrder() {
-            return unifiedOrder;
-        }
-
-        public void setUnifiedOrder(String unifiedOrder) {
-            this.unifiedOrder = unifiedOrder;
-        }
-
-        public String getOrderQuery() {
-            return orderQuery;
-        }
-
-        public void setOrderQuery(String orderQuery) {
-            this.orderQuery = orderQuery;
-        }
-
-        public String getCloseOrder() {
-            return closeOrder;
-        }
-
-        public void setCloseOrder(String closeOrder) {
-            this.closeOrder = closeOrder;
-        }
-
-        public String getDownloadBill() {
-            return downloadBill;
-        }
-
-        public void setDownloadBill(String downloadBill) {
-            this.downloadBill = downloadBill;
-        }
+    public String getAppId() {
+        return appId;
     }
 
-    public String getAppid() {
-        return appid;
+    public String getAppSecret() {
+        return appSecret;
     }
 
-    public void setAppid(String appid) {
-        this.appid = appid;
-    }
-
-    public String getAppsecret() {
-        return appsecret;
-    }
-
-    public void setAppsecret(String appsecret) {
-        this.appsecret = appsecret;
-    }
-
-    public String getMchid() {
-        return mchid;
-    }
-
-    public void setMchid(String mchid) {
-        this.mchid = mchid;
+    public String getMchId() {
+        return mchId;
     }
 
     public String getKey() {
         return key;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public String getAuthorizeApi(String redirectUri, String state) throws UnsupportedEncodingException {
+        return authorizeApi.replace("$REDIRECT_URI$", URLEncoder.encode(redirectUri, "UTF-8")).replace("$STATE$", state);
+    }
+
+    public String getAccessTokenApi(String code) {
+        return accessTokenApi.replace("$CODE$", code);
+    }
+
+    public String getUnifiedOrderApi() {
+        return unifiedOrderApi;
+    }
+
+    public String getOrderQueryApi() {
+        return orderQueryApi;
+    }
+
+    public String getCloseOrderApi() {
+        return closeOrderApi;
+    }
+
+    public String getDownloadBillApi() {
+        return downloadBillApi;
     }
 
     public String getNotifyUrl() {
         return notifyUrl;
-    }
-
-    public void setNotifyUrl(String notifyUrl) {
-        this.notifyUrl = notifyUrl;
-    }
-
-    public Api getApi() {
-        return api;
-    }
-
-    public void setApi(Api api) {
-        this.api = api;
     }
 }
