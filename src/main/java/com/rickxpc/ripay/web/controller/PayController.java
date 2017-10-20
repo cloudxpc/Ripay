@@ -1,23 +1,24 @@
 package com.rickxpc.ripay.web.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rickxpc.ripay.service.PaymentService;
+import com.rickxpc.ripay.domain.Payment;
+import com.rickxpc.ripay.domain.PaymentWxPub;
+import com.rickxpc.ripay.repository.PaymentModeRepository;
+import com.rickxpc.ripay.repository.PaymentRepository;
+import com.rickxpc.ripay.repository.PaymentWxPubRepository;
+import com.rickxpc.ripay.service.WxPubService;
 import com.rickxpc.ripay.service.dto.UnifiedOrderParam;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/pay")
@@ -25,30 +26,30 @@ public class PayController {
     private Log logger = LogFactory.getLog(PayController.class);
 
     @Autowired
-    private PaymentService paymentService;
+    private WxPubService wxPubService;
 
     @RequestMapping(value = "/unifiedorder", method = RequestMethod.POST)
     public Map<String, String> unifiedOrder(HttpServletRequest request, @RequestBody UnifiedOrderParam param) throws Exception {
         param.setRemoteIp(request.getRemoteAddr());
 //        param.setRemoteIp("127.0.0.1");
-        Map<String, String> resultData = paymentService.unifiedOrder(param);
+        Map<String, String> resultData = wxPubService.unifiedOrder(param);
         return resultData;
     }
 
     @RequestMapping(value = "/orderquery", method = RequestMethod.GET)
     public Map<String, String> orderquery(
             @RequestParam(required = false) String transId,
-            @RequestParam(required = false) String tradeNo
+            @RequestParam(required = false) String orderId
     ) throws Exception {
         if (transId != null && !transId.isEmpty())
-            return paymentService.orderQueryByTransId(transId);
+            return wxPubService.orderQueryByTransId(transId);
         else
-            return paymentService.orderQueryByTradeNo(tradeNo);
+            return wxPubService.orderQueryByOrderId(orderId);
     }
 
     @RequestMapping(value = "/closeorder", method = RequestMethod.GET)
-    public Map<String, String> closeorder(@RequestParam String tradeNo) throws Exception {
-        return paymentService.closeOrder(tradeNo);
+    public Map<String, String> closeorder(@RequestParam String orderId) throws Exception {
+        return wxPubService.closeOrder(orderId);
     }
 
     /**
@@ -86,7 +87,7 @@ public class PayController {
 
             synchronized (this) {
                 logger.info("Handling notify...");
-                paymentService.handleResultNotify(sb.toString());
+                wxPubService.handleResultNotify(sb.toString());
             }
 
             logger.info("Send back success msg to WeChat server...");
@@ -119,52 +120,9 @@ public class PayController {
         }
     }
 
-
-//    @Autowired
-//    private UserRepository userRepository;
-//    @Autowired
-//    private ContractRepository contractRepository;
-//
-//    @RequestMapping(value = "/getReceivableInfo", method = RequestMethod.GET)
-//    public ReceivableDto getReceivableInfo(@RequestParam String openId) throws Exception {
-//        User user = userRepository.findUserByOpenId(openId);
-//        if (user == null)
-//            throw new Exception("Cannot find user by OpenID '" + openId + "'");
-//        List<Contract> contracts = contractRepository.findContractsByCustomerId(user.getCustomerId());
-//        List<ContractReceivableDto> contractDtos = contracts.stream().map(c -> {
-//            ContractReceivableDto dto = new ContractReceivableDto();
-//            dto.setId(c.getId());
-//            dto.setContractNumber(c.getContractNumber());
-//            dto.setModel(c.getAssetModelDsc());
-//            dto.setDueAmt(BigDecimal.valueOf(123));
-//            dto.setNextRentalAmt(BigDecimal.valueOf(15300));
-//            return dto;
-//        }).collect(Collectors.toList());
-//        ReceivableDto receivableDto = new ReceivableDto();
-//        receivableDto.setContracts(contractDtos);
-//        receivableDto.setTotalDueAmt(contractDtos.stream().map(c -> c.getDueAmt()).reduce(BigDecimal.ZERO, BigDecimal::add));
-//        receivableDto.setTotalNextRentalAmt(contractDtos.stream().map(c -> c.getNextRentalAmt()).reduce(BigDecimal.ZERO, BigDecimal::add));
-//
-//        return receivableDto;
-//    }
-//
-//    @RequestMapping(value = "/reconcile", method = RequestMethod.GET)
-//    public void reconcile(@RequestParam String dateStr) throws Exception {
-//        Date yyyyMMdd = new SimpleDateFormat("yyyyMMdd").parse(dateStr);
-//        paymentService.reconcileByDate(dateStr);
-//    }
-//
-//    @Autowired
-//    private RestTemplate restTemplate;
-//    @Autowired
-//    private WxConfig wxConfig;
-//
-//    @RequestMapping(value = "/auth", method = RequestMethod.GET)
-//    public void auth(@RequestParam String code, @RequestParam String state, HttpServletResponse response) throws Exception {
-//        String accessTokenApi = wxConfig.getAccessTokenApi(code);
-//        String result = restTemplate.getForObject(accessTokenApi, String.class);
-//        Map<String, String> map = new ObjectMapper().readValue(result, Map.class);
-//        String openid = map.get("openid");
-//        response.sendRedirect("https://wechat.xiaoqi.com/wechat/index.html?#/pay/" + openid);
-//    }
+    //@RequestMapping(value = "/reconcile", method = RequestMethod.GET)
+    public void reconcile(@RequestParam String dateStr) throws Exception {
+        Date yyyyMMdd = new SimpleDateFormat("yyyyMMdd").parse(dateStr);
+        wxPubService.reconcileByDate(dateStr);
+    }
 }

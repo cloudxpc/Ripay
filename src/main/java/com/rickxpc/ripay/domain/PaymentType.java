@@ -7,27 +7,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "paymenttype", schema = "wechat")
+@Table(name = "payment_type")
 public class PaymentType {
 	@Id
-	@Column(name="PaymentTypeCode")
-	private String paymentTypeCode;
-	@Column(name="PaymentTypeDsc")
-	private String paymentTypeDsc;
+	@Column(name = "code")
+	private String code;
+	@Column(name = "desc")
+	private String desc;
 
-	public String getPaymentTypeCode() {
-		return paymentTypeCode;
+	public String getCode() {
+		return code;
 	}
 
-	public void setPaymentTypeCode(String paymentTypeCode) {
-		this.paymentTypeCode = paymentTypeCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public String getPaymentTypeDsc() {
-		return paymentTypeDsc;
+	public String getDesc() {
+		return desc;
 	}
 
-	public void setPaymentTypeDsc(String paymentTypeDsc) {
-		this.paymentTypeDsc = paymentTypeDsc;
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 }

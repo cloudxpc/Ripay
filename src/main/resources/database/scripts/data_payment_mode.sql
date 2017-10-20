@@ -1,0 +1,1 @@
+INSERT INTO `payment_mode`(`code`,`desc`) VALUES('00001', '微信公众号支付');

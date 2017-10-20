@@ -1,63 +1,55 @@
 package com.rickxpc.ripay.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
-@Table(name = "payment", schema = "wechat")
+@Table(name = "payment")
 public class Payment {
     @Id
-    @Column(name = "Id")
-    private String id;
-    @Column(name = "UserId")
-    private String userId;
-    @Column(name = "PaymentTypeCode")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @GeneratedValue(generator = "uuid2")
+    @Column(name = "id", columnDefinition = "BINARY(16)")
+    private UUID id;
+    @Column(name = "payment_mode_code")
+    private String paymentModeCode;
+    @Column(name = "payment_type_code")
     private String paymentTypeCode;
-    @Column(name = "TradeNo")
-    private String tradeNo;
-    @Column(name = "Status")
-    private Character status;
-    @Column(name = "Title")
+    @Column(name = "order_id")
+    private String orderId;
+    @Column(name = "state")
+    private Character state;
+    @Column(name = "title")
     private String title;
-    @Column(name = "Attach")
+    @Column(name = "attach")
     private String attach;
-    @Column(name = "TotalFee")
-    private BigDecimal totalFee;
-    @Column(name = "RemoteIP")
-    private String remoteIP;
-    @Column(name = "TradeType")
-    private String tradeType;
-    @Column(name = "DeviceInfo")
-    private String deviceInfo;
-    @Column(name = "TransactionId")
+    @Column(name = "total_amt")
+    private BigDecimal totalAmt;
+    @Column(name = "transaction_id")
     private String transactionId;
-    @Column(name = "IsSubscribe")
-    private Character isSubscribe;
-    @Column(name = "BankType")
-    private String bankType;
-    @Column(name = "CreationDate")
+    @Column(name = "creation_date")
     private Date creationDate;
-    @Column(name = "CompleteDate")
+    @Column(name = "complete_date")
     private Date completeDate;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getPaymentModeCode() {
+        return paymentModeCode;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setPaymentModeCode(String paymentModeCode) {
+        this.paymentModeCode = paymentModeCode;
     }
 
     public String getPaymentTypeCode() {
@@ -68,20 +60,20 @@ public class Payment {
         this.paymentTypeCode = paymentTypeCode;
     }
 
-    public String getTradeNo() {
-        return tradeNo;
+    public String getOrderId() {
+        return orderId;
     }
 
-    public void setTradeNo(String tradeNo) {
-        this.tradeNo = tradeNo;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
-    public Character getStatus() {
-        return status;
+    public Character getState() {
+        return state;
     }
 
-    public void setStatus(Character status) {
-        this.status = status;
+    public void setState(Character state) {
+        this.state = state;
     }
 
     public String getTitle() {
@@ -100,36 +92,12 @@ public class Payment {
         this.attach = attach;
     }
 
-    public BigDecimal getTotalFee() {
-        return totalFee;
+    public BigDecimal getTotalAmt() {
+        return totalAmt;
     }
 
-    public void setTotalFee(BigDecimal totalFee) {
-        this.totalFee = totalFee;
-    }
-
-    public String getRemoteIP() {
-        return remoteIP;
-    }
-
-    public void setRemoteIP(String remoteIP) {
-        this.remoteIP = remoteIP;
-    }
-
-    public String getTradeType() {
-        return tradeType;
-    }
-
-    public void setTradeType(String tradeType) {
-        this.tradeType = tradeType;
-    }
-
-    public String getDeviceInfo() {
-        return deviceInfo;
-    }
-
-    public void setDeviceInfo(String deviceInfo) {
-        this.deviceInfo = deviceInfo;
+    public void setTotalAmt(BigDecimal totalAmt) {
+        this.totalAmt = totalAmt;
     }
 
     public String getTransactionId() {
@@ -138,22 +106,6 @@ public class Payment {
 
     public void setTransactionId(String transactionId) {
         this.transactionId = transactionId;
-    }
-
-    public Character getIsSubscribe() {
-        return isSubscribe;
-    }
-
-    public void setIsSubscribe(Character isSubscribe) {
-        this.isSubscribe = isSubscribe;
-    }
-
-    public String getBankType() {
-        return bankType;
-    }
-
-    public void setBankType(String bankType) {
-        this.bankType = bankType;
     }
 
     public Date getCreationDate() {
