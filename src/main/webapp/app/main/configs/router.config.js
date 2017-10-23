@@ -33,7 +33,7 @@
                 }
             }
         }).state("pay", {
-            url: '/pay/:openid',
+            url: '/pay',
             views: {
                 'content': {
                     templateUrl: 'app/pay/views/pay.html',

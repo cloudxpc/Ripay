@@ -1,0 +1,23 @@
+<div class="list-group">
+    <a href="javascript:void(0);" class="list-group-item" ng-class="{'active':option == '1'}" ng-click="option='1'">
+        <div class="radio">
+            <label>
+                <input type="radio" name="options" id="option1" value="1" ng-model="option">
+                <i class="icon_wx"></i>
+                <span>微信支付</span>
+            </label>
+        </div>
+    </a>
+    <a href="javascript:void(0);" class="list-group-item" ng-class="{'active':option == '2'}" ng-click="option='2'">
+        <div class="radio">
+            <label>
+                <input type="radio" name="options" id="option2" value="2" ng-model="option">
+                支付宝
+            </label>
+        </div>
+    </a>
+</div>
+{{option}}
+<div style="border: 1px solid black; height: 100px; width: 100px;">
+    <p style="position: relative; top: 50%; transform: translateY(-50%);">i'm ok</p>
+</div>
