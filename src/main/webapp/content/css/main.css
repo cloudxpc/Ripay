@@ -7,10 +7,42 @@
     /*color: #FFF;*/
 }
 
-.icon_wx {
+.pay-list {
+    height: 60px;
+}
+
+.pay-list.on{
+    background-color: #f5f5f5;
+}
+
+.pay-list-item {
+    float: left;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-right: 5px;
+}
+
+.pay-list-item.fa{
+    margin-right: 15px;
+}
+
+.pay-list-item.fa-check{
+    color: green;
+}
+
+.icon-wx {
     display: inline-block;
     height: 25px;
-    width: 25px;
+    width: 24px;
     background-image: url("../images/icon_wx.png");
+    background-size: cover;
+}
+
+.icon-alipay {
+    display: inline-block;
+    height: 23px;
+    width: 24px;
+    background-image: url("../images/icon_alipay.png");
     background-size: cover;
 }
