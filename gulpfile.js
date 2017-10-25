@@ -11,6 +11,7 @@ var templatename = 'template.' + Date.now() + '.js';
 gulp.task('scripts', function () {
     var sources = [
         'src/main/webapp/libs/jquery/dist/jquery.js',
+        'src/main/webapp/libs/popper.js/dist/umd/popper.js',
         'src/main/webapp/libs/bootstrap/dist/js/bootstrap.js',
         'src/main/webapp/libs/angular/angular.js',
         'src/main/webapp/libs/angular-ui-router/release/angular-ui-router.js',

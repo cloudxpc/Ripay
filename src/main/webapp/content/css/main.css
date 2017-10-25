@@ -1,4 +1,10 @@
 
+body {
+    background-color: #f8f8f8;
+    padding-bottom: 70px;
+    /*font-size: 14rem;*/
+}
+
 .jumbotron {
     background-image: url("../images/pay_jumbotron.jpg");
     background-repeat: no-repeat;
@@ -8,11 +14,11 @@
 }
 
 .pay-list {
-    height: 60px;
+    height: 50px;
 }
 
-.pay-list.on{
-    background-color: #f5f5f5;
+.pay-list.on {
+    background-color: #f8f5e4;
 }
 
 .pay-list-item {
@@ -23,26 +29,30 @@
     margin-right: 5px;
 }
 
-.pay-list-item.fa{
+.pay-list-item.fa {
     margin-right: 15px;
 }
 
-.pay-list-item.fa-check{
-    color: green;
+.pay-list-item.fa-check {
+    color: #5cb85c;
+}
+
+.pay-btn-panel {
+    background-color: #f8f8f8;
 }
 
 .icon-wx {
     display: inline-block;
     height: 25px;
-    width: 24px;
-    background-image: url("../images/icon_wx.png");
+    width: 22px;
+    background-image: url("../images/logo_wx.png");
     background-size: cover;
 }
 
 .icon-alipay {
     display: inline-block;
     height: 23px;
-    width: 24px;
-    background-image: url("../images/icon_alipay.png");
+    width: 23px;
+    background-image: url("../images/logo_alipay.png");
     background-size: cover;
 }

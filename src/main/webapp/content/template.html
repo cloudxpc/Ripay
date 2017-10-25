@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh-cmn-Hans" ng-app="ripayApp">
 <head>
+    <title>Ripay</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Ripay</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="content/css/main.css">
 
 </head>
 <body>
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1>支付</h1>
+        <p class="lead">整合支付渠道</p>
+    </div>
+</div>
 <div class="container">
     <div ui-view="content">
 
