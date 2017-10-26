@@ -37,9 +37,7 @@
             views: {
                 'content': {
                     templateUrl: 'app/pay/views/pay.html',
-                    // controller: ['$rootScope', '$stateParams', function ($rootScope, $stateParams) {
-                    //     $rootScope.openid = $stateParams.openid;
-                    // }]
+                    controller: 'PayController'
                 }
             }
         });

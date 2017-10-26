@@ -9,6 +9,7 @@ public class UnifiedOrderParam {
     private String remoteIp;
     private String openId;
     private String paymentTypeCode;
+    private String paymentModeCode;
 
     public String getTitle() {
         return title;
@@ -56,5 +57,13 @@ public class UnifiedOrderParam {
 
     public void setPaymentTypeCode(String paymentTypeCode) {
         this.paymentTypeCode = paymentTypeCode;
+    }
+
+    public String getPaymentModeCode() {
+        return paymentModeCode;
+    }
+
+    public void setPaymentModeCode(String paymentModeCode) {
+        this.paymentModeCode = paymentModeCode;
     }
 }

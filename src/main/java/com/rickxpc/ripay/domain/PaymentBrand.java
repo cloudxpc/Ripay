@@ -6,15 +6,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "payment_mode")
-public class PaymentMode {
+@Table(name = "payment_brand")
+public class PaymentBrand {
     @Id
     @Column(name = "code")
     private String code;
     @Column(name = "desc")
     private String desc;
-    @Column(name = "payment_brand_code")
-    private String paymentBrandCode;
 
     public String getCode() {
         return code;
@@ -30,13 +28,5 @@ public class PaymentMode {
 
     public void setDesc(String desc) {
         this.desc = desc;
-    }
-
-    public String getPaymentBrandCode() {
-        return paymentBrandCode;
-    }
-
-    public void setPaymentBrandCode(String paymentBrandCode) {
-        this.paymentBrandCode = paymentBrandCode;
     }
 }
