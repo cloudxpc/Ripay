@@ -12,24 +12,9 @@
         		}
         	}
         }).state("pay-success", {
-            params: { jsApiData: null },
             views: {
                 'content': {
                     templateUrl: 'app/pay/views/pay-success.html'
-                }
-            }
-        }).state("pay-error", {
-            views: {
-                'content': {
-                    templateUrl: 'app/pay/views/pay-error.html'
-                }
-            }
-        }).state("pay-confirm", {
-            params: { jsApiData: null },
-            views: {
-                'content': {
-                    templateUrl: 'app/pay/views/pay-confirm.html',
-                    // controller: 'PayConfirmController'
                 }
             }
         }).state("pay", {

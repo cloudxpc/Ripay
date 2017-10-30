@@ -15,6 +15,10 @@
 
         var responseError = function (rejection) {
             $rootScope.$broadcast('loading-complete');
+            if (rejection.data){
+                alert(rejection.data.errorMessage + ' ' + rejection.data.description);
+            }
+
             // if (rejection.status === 401) {
             //     $location.path('/login');
             // } else if (rejection.status === 500) {
